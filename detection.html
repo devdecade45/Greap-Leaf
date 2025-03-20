@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrapeGuard - Disease Detection</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>GrapeGuard</h1>
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="detection.html" class="active">Disease Detection</a></li>
+                <li><a href="diseases.html">Diseases</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="detection-main">
+        <div class="detection-sidebar">
+            <div class="sidebar-content">
+                <div class="sidebar-header">
+                    <h2>Grape Leaf Disease Detection</h2>
+                    <p>Upload a photo of your grape leaf and get instant AI analysis</p>
+                </div>
+                
+                <div class="detection-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value">95%+</span>
+                            <span class="stat-label">Accuracy</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value">3s</span>
+                            <span class="stat-label">Processing Time</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value">4</span>
+                            <span class="stat-label">Detectable Conditions</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detection-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-details">
+                            <h3>Upload Image</h3>
+                            <p>Take a clear photo of your grape leaf and upload it</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-details">
+                            <h3>AI Analysis</h3>
+                            <p>Our CNN model analyzes patterns and features</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-details">
+                            <h3>Get Results</h3>
+                            <p>Receive diagnosis with confidence levels and treatment options</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-cta">
+                    <a href="#diseases-section" class="btn-secondary">Learn About Diseases</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="detection-content">
+            <div class="detection-card upload-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-upload"></i> Upload Grape Leaf Image</h3>
+                </div>
+                <div class="upload-container">
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <p>Drag & Drop or Click to Upload</p>
+                        <p class="drag-hint">Supported formats: JPG, JPEG, PNG</p>
+                        <input type="file" id="file-input" accept="image/*" hidden>
+                    </div>
+                    
+                    <div class="upload-tips">
+                        <h4>For Best Results:</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Use clear, well-lit images</li>
+                            <li><i class="fas fa-check-circle"></i> Center the leaf in frame</li>
+                            <li><i class="fas fa-check-circle"></i> Show both sides if possible</li>
+                            <li><i class="fas fa-check-circle"></i> Capture multiple leaves if available</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button id="detect-btn" class="btn-detect" disabled>
+                        <i class="fas fa-microscope"></i> Detect Disease
+                    </button>
+                </div>
+            </div>
+            
+            <div class="detection-card result-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-pie"></i> Detection Results</h3>
+                </div>
+                <div class="result-container" id="result-container">
+                    <div class="result-content">
+                        <div class="image-preview-container">
+                            <div class="image-preview">
+                                <img id="preview-image" src="" alt="Preview">
+                                <div class="preview-overlay">
+                                    <div class="preview-message">
+                                        <i class="fas fa-image"></i>
+                                        <p>Image preview will appear here</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="result-details" id="result-details">
+                            <div class="initial-message">
+                                <i class="fas fa-arrow-left"></i>
+                                <p>Upload an image to see detection results</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section id="diseases-section" class="diseases-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Detectable Grape Leaf Conditions</h2>
+                <p>Our AI model is trained to identify these common grape leaf diseases with high accuracy</p>
+            </div>
+            
+            <div class="diseases-grid">
+                <div class="disease-item">
+                    <div class="disease-image">
+                        <img src="images/state/rot.JPG" alt="Black Rot">
+                        <div class="disease-badge">Common</div>
+                    </div>
+                    <div class="disease-content">
+                        <h3>Black Rot</h3>
+                        <p>A fungal disease causing dark, circular lesions on grape leaves that can severely damage fruit if left untreated.</p>
+                        <div class="disease-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Severity</span>
+                                <div class="meta-bar high"></div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Treatment Difficulty</span>
+                                <div class="meta-bar medium"></div>
+                            </div>
+                        </div>
+                        <a href="diseases.html#black-rot" class="btn-learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="disease-item">
+                    <div class="disease-image">
+                        <img src="images/state/esca.JPG" alt="Esca (Black Measles)">
+                        <div class="disease-badge">Severe</div>
+                    </div>
+                    <div class="disease-content">
+                        <h3>Esca (Black Measles)</h3>
+                        <p>A complex fungal disease causing tiger-stripe patterns on leaves that can eventually kill the entire vine.</p>
+                        <div class="disease-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Severity</span>
+                                <div class="meta-bar high"></div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Treatment Difficulty</span>
+                                <div class="meta-bar high"></div>
+                            </div>
+                        </div>
+                        <a href="diseases.html#esca" class="btn-learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="disease-item">
+                    <div class="disease-image">
+                        <img src="images/state/Leaf Blight.JPG" alt="Leaf Blight">
+                        <div class="disease-badge">Moderate</div>
+                    </div>
+                    <div class="disease-content">
+                        <h3>Leaf Blight</h3>
+                        <p>Causes small, brown spots with yellow halos that can expand and cause defoliation in severe cases.</p>
+                        <div class="disease-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Severity</span>
+                                <div class="meta-bar medium"></div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Treatment Difficulty</span>
+                                <div class="meta-bar medium"></div>
+                            </div>
+                        </div>
+                        <a href="diseases.html#leaf-blight" class="btn-learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="disease-item">
+                    <div class="disease-image">
+                        <img src="images/state/healthy.JPG" alt="Healthy Leaf">
+                        <div class="disease-badge healthy">Healthy</div>
+                    </div>
+                    <div class="disease-content">
+                        <h3>Healthy Leaf</h3>
+                        <p>Green, intact leaves free from spots, discoloration, or abnormal growth patterns indicating good vine health.</p>
+                        <div class="disease-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Ideal Color</span>
+                                <div class="meta-bar high"></div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Ideal Texture</span>
+                                <div class="meta-bar high"></div>
+                            </div>
+                        </div>
+                        <a href="diseases.html#healthy" class="btn-learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our disease detection system</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What image formats are supported?</h3>
+                        <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our system supports JPG, JPEG, and PNG image formats. For best results, use high-resolution images with good lighting and clear focus on the leaf.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How accurate is the detection?</h3>
+                        <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our model has been trained on thousands of images and achieves over 95% accuracy in controlled tests. However, accuracy may vary depending on image quality and disease severity. For critical cases, we recommend consulting with a viticulture expert.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is my data kept private?</h3>
+                        <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we respect your privacy. Uploaded images are only used for disease detection and are not shared with third parties. Images may be stored temporarily to improve our model's accuracy, but no personal information is collected or stored.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What if my grape variety isn't common?</h3>
+                        <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our model has been trained on various grape varieties, but performance may vary for rare varieties. We're continuously improving our model to cover more varieties. If you're working with an uncommon grape variety, please note this when interpreting results.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Need Expert Advice?</h2>
+                <p>Our team of agricultural experts is ready to help with personalized recommendations for your vineyard.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn-primary">Contact Us</a>
+                    <a href="diseases.html" class="btn-outline">Learn About Diseases</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>GrapeGuard</h2>
+                    <p>Advanced Grape Disease Detection</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="detection.html">Disease Detection</a></li>
+                        <li><a href="diseases.html">Diseases</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GrapeGuard. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
